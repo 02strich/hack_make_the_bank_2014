@@ -1,0 +1,22 @@
+body { padding-top: 70px; }
+
+.bank_logo {
+    width: 150px;
+    height: 150px;
+    padding-top: 5px;
+    text-align: center;
+    border: solid black;
+
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.bank_logo:hover {
+    background-color: #eee;
+    border: solid #aaa;
+}
+
+.bank_logo img {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,60 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}better banking payment system{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link href="{{url_for('static', filename='custom.css')}}" rel="stylesheet" media="screen" />
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">payment system</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" role="main">
+        <div class="row">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1"><strong>Payment Details</strong></div>
+                    <div class="col-md-8">
+                        <p>You are going to pay:</p>
+                        <ul>
+                            <li><strong>Merchant:</strong>&nbsp;Demo Merchant</li>
+                            <li><strong>Product:</strong>&nbsp;Ticket for Hackathon</li>
+                            <li><strong>Amount:</strong>&nbsp;{{'%0.2f'|format(amount|float)}} EUR</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1"><strong>Account Selection</strong></div>
+                    <div class="col-md-8">
+                        <p>Plese select the account you would like to charge:</p>
+                        {% for account in accounts %}
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="account_select" id="account_select" value="{{account['id']}}|{{account['bank_id']}}" checked>
+                                    {{account['label']}} ({{account['id']}}) <span class="badge">{{account['balance']['amount']}} {{account['balance']['currency']}}</span>
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="well">
+                        <div class="row">
+                        <div class="col-md-8 col-md-offset-3">
+                            <button type="submit" class="btn btn-primary">Pay</button>
+                        </div></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

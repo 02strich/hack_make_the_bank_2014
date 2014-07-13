@@ -1,0 +1,45 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}better banking payment system{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link href="{{url_for('static', filename='custom.css')}}" rel="stylesheet" media="screen" />
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">payment system</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" role="main">
+        <div class="row">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success" role="alert">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    {% for name, details in connected_banks.iteritems() %}
+                        <div class="col-xs-3 bank_logo">
+                            <a href="/connect/{{name}}"><img src="{{details['icon']}}" alt="{{name}}" title="{{name}}"></img>{{name}}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
